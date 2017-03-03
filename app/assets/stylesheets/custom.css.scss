@@ -2,3 +2,6 @@ $navbar-default-bg: #08088A;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+table, th, td {
+    width: 500px;
+}
