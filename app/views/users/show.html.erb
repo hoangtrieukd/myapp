@@ -1,2 +1,12 @@
-<h1>Show <%=@user.username%>'articles</h1>
-<%= render 'articles/article', obj: @user.articles%>
+<h1 align="center">Welcome to <%= @user.username %>'s page</h1>
+<h4 align="center"><%= @user.username %>'s articles</h4>
+
+<div class="center">
+	<%= will_paginate @user_articles %>
+</div>
+
+<%= render 'articles/article', obj: @user_articles %>
+
+<div class="center">
+	<%= will_paginate @user_articles %>
+</div>

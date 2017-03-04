@@ -4,15 +4,16 @@ class UsersController < ApplicationController
 	end
 	
 	def index
-		@users = User.all
+		@users = User.paginate(page: params[:page], per_page: 5)
 		
 	end
 
 	def create
 		@user = User.new(user_params)
 		if @user.save
+			session[:user_id] = @user.id
 			flash[:success] = "Welcome to the alpha blog #{@user.username}"
-			redirect_to articles_path
+			redirect_to user_path(@user)
 		else
 			render 'new'
 		end
@@ -35,6 +36,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])	
+		@user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
 	end
 
 	def destroy
@@ -43,7 +45,6 @@ class UsersController < ApplicationController
 		flash[:notice]="deleted"
 		redirect_to users_path
 	end
-
 
 	private
 	

@@ -1,18 +1,17 @@
-<h1>Listing all users</h1>
-<%= link_to "create user", signup_path%>
-<table>
-	<tr>
-		<th>Username</th>
-		<th>Email</th>
-	</tr>
-
-	<% @users.each do |user|%>
-	<tr>
-		<td><%= user.username%></td>
-		<td><%= user.email%></td>
-		<td><%= link_to "edit",edit_user_path(user)%></td>
-		<td><%= link_to "delete", user_path(user), method: :delete %></td>
-		<td><%= link_to "show", user_path(user)%></td>
-	</tr>
-	<%end%>
-</table>
+<h1 align="center">All Alpha Bloggers</h1>
+<div align="center">
+	<%= will_paginate %>
+	<% @users.each do |user| %>
+	<ul class="listing">
+	<div class="row">
+		<div class="well col-md-4 col-md-offset-4">
+			<li class="article-title">
+			<%= link_to user.username, user_path(user) %>
+			</li>
+			<li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
+		</div>
+	</div>
+</ul>
+<% end %>
+<%= will_paginate %>
+</div>
